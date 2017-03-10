@@ -23,7 +23,8 @@ RUN wget https://www.dropbox.com/s/phtmdgcjfvabp7w/winxp.img
 
 RUN vncserver 
 RUN vncserver -kill :1 
-RUＮ　chmod +x ~/.vnc/xstartup
+
+RUN chmod +x ~/.vnc/xstartup
 
 RUN echo 'qemu-system-x86_64 -hda kvm/winxp.img -m 512M -net nic,model=virtio -net user -redir tcp:3389::3389'  >>/root/.vnc/xstartup
   
