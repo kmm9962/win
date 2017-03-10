@@ -13,8 +13,8 @@ RUN mkdir /var/run/sshd && \
 
 
 RUN apt-get update \
-	&& apt-get install -y install qemu wget \
-		vnc4server \
+	&& apt-get install -y install qemu wget\	
+	&& apt-get -y vnc4server \
 	&& apt-get autoclean \
 	&& apt-get autoremove \
 	&& rm -rf /var/lib/apt/lists/*
