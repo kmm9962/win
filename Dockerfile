@@ -12,25 +12,25 @@ RUN mkdir /var/run/sshd && \
 	sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 
 
-RUN apt-get update \
-	&& apt-get install -y install qemu wget\	
-	&& apt-get -y vnc4server \
-	&& apt-get autoclean \
-	&& apt-get autoremove \
-	&& rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+	apt-get install -y install qemu wget && \
+		vnc4server && \
+	apt-get autoclean && \
+	apt-get autoremove && \
+	rm -rf /var/lib/apt/lists/*
 RUN cd
 RUN wget https://www.dropbox.com/s/phtmdgcjfvabp7w/winxp.img
 
-RUN vncserver \
-    && vncserver -kill :1
-    && chmod +x ~/.vnc/xstartup
+RUN vncserver 
+RUN vncserver -kill :1 
+RUＮ　chmod +x ~/.vnc/xstartup
 
 RUN echo 'qemu-system-x86_64 -hda kvm/winxp.img -m 512M -net nic,model=virtio -net user -redir tcp:3389::3389'  >>/root/.vnc/xstartup
   
-RUN wget https://www.freehao123.info/myvps/vncserver \
-    && cp vncserver /etc/init.d/
-    && chmod +x /etc/init.d/vncserver
-    && update-rc.d vncserver defaults
+RUN wget https://www.freehao123.info/myvps/vncserver 
+RUN cp vncserver /etc/init.d/
+RUN chmod +x /etc/init.d/vncserver
+RUN update-rc.d vncserver defaults
 
 WORKDIR /root	
 
