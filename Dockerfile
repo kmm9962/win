@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu-sshd:16.04
 
 RUN apt-get update && \
 	apt-get clean  && \
@@ -14,7 +14,7 @@ RUN mkdir /var/run/sshd && \
 
 RUN apt-get update && \
 	apt-get install -y install qemu wget && \
-		vnc4server && \
+	apt-get vnc4server && \
 	apt-get autoclean && \
 	apt-get autoremove && \
 	rm -rf /var/lib/apt/lists/*
@@ -23,8 +23,7 @@ RUN wget https://www.dropbox.com/s/phtmdgcjfvabp7w/winxp.img
 
 RUN vncserver 
 RUN vncserver -kill :1 
-
-RUN chmod +x ~/.vnc/xstartup
+RUＮ　chmod +x ~/.vnc/xstartup
 
 RUN echo 'qemu-system-x86_64 -hda kvm/winxp.img -m 512M -net nic,model=virtio -net user -redir tcp:3389::3389'  >>/root/.vnc/xstartup
   
